@@ -1,49 +1,117 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Selouse</title>
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-        crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" type="text/css" href="style.css" />
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div id="search">
-        <input type="text" placeholder="Address" id="addr-input">
-        <input type="number" class="min price" placeholder="Min. Price" id="min-p-input">
-        <input type="number" class="max price" placeholder="Max Price" id="max-p-input">
-        <input type="number" class="min room" placeholder="Min. Rooms" id="min-r-input">
-        <input type="number" class="max room" placeholder="Max Rooms" id="max-r-input">
+      <input type="text" placeholder="Address" id="addr-input" />
+      <input
+        type="number"
+        class="min price"
+        placeholder="Min. Price"
+        id="min-p-input"
+      />
+      <input
+        type="number"
+        class="max price"
+        placeholder="Max Price"
+        id="max-p-input"
+      />
+      <input
+        type="number"
+        class="min room"
+        placeholder="Min. Rooms"
+        id="min-r-input"
+      />
+      <input
+        type="number"
+        class="max room"
+        placeholder="Max Rooms"
+        id="max-r-input"
+      />
 
-        <div class="check-group">
-            <input class="form-radio" type="checkbox" name="immediate" id="immed-y">
-            <label for="immediate">Immediate</label>
-        </div>
-        <div class="check-group">
-            <input class="form-radio" type="checkbox" name="parking" id="park-y">
-            <label for="parking">Parking</label>
-        </div>
+      <div class="check-group">
+        <input
+          class="form-radio"
+          type="checkbox"
+          name="immediate"
+          id="immed-y"
+        />
+        <label for="immediate">Immediate</label>
+      </div>
+      <div class="check-group">
+        <input class="form-radio" type="checkbox" name="parking" id="park-y" />
+        <label for="parking">Parking</label>
+      </div>
 
-        <button>Find Apartments</button>
+      <button>Find Apartments</button>
     </div>
 
-    <hr>
+    <hr />
 
     <div id="results"></div>
 
     <!-- Your Code Here -->
-    <!-- You should start doing handlebar stuff here -->
+    <script id="results-template" type="text/x-handlebars-template">
+      {{#unless apartment}}
+        <p class="no-match">There are no apartments to show for this search...</p>
+      {{/unless}}
+      {{#each apartment}}
+        <div class="result">
+          <img src="{{img}}" />
+          <i class="fa-solid fa-location-arrow label l-addr"></i>
+          <p class="address">{{address}}</p>
+          <i class="fa-solid fa-hand-holding-dollar label l-price"></i>
+          <p class="price">{{price}}</p>
+          <i class="fa-solid fa-door-open l-rooms"></i>
+          <p class="rooms">{{rooms}}</p>
+          {{#if parking}}
+            <i class="fa-solid fa-square-parking label l-park"></i>
+            <p class="parking">yes</p>
+          {{/if}}
+          {{#unless parking}}
+            <i class="fa-solid fa-square-parking label l-park"></i>
+            <p class="parking">no</p>
+          {{/unless}}
+          {{#if immediate}}
+            <i class="fa-solid fa-check label l-immediate"></i>
+            <p class="immediate">available</p>
+          {{/if}}
+          {{#unless immediate}}
+            <i class="fa-solid fa-exclamation label l-immediate"></i>
+            <p class="immediate">unavailable</p>
+          {{/unless}}
+          <!-- <div class="contact">
+            <i class="fa-solid fa-user">{{contactDetails.name}}</i>
+            <i class="fa-solid fa-envelope">{{contactDetails.email}}</i>
+          </div> -->
+        </div>
+      {{/each}}
+    </script>
     <!-- Your Code Here -->
 
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
     <script src="apt-data.js"></script>
     <script src="apt-filter.js"></script>
     <script src="main.js"></script>
-</body>
-
+  </body>
 </html>
